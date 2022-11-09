@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>background</title>
+</head>
+<body style="background-color:yellow;">
+    <button id="rosso">Rosso</button>
+    <button id="verde">Verde</button>
+    <button id="blue">Blue</button>
+    <script>
+        let body=document.querySelector('body');
+        document.querySelector('#rosso').addEventListener('mouseover',function() {
+            body.style.backgroundColor='red';
+        });
+        document.querySelector('#verde').addEventListener('click',function() {
+            body.style.backgroundColor='green';
+        });
+        document.querySelector('#blue').addEventListener('click',function() {
+            body.style.backgroundColor='blue';
+        });
+
+    </script>
+
+</body>
+</html>
