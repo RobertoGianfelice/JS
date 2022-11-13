@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        Ordini PLC
+    </title>
+    <style>
+        body {
+            background-color: antiquewhite;
+        }
+        .testo, li {
+            font-size: 20px;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            document.querySelector('form').onsubmit = () => {
+                // Create new item for list
+                const li = document.createElement('li');
+
+                let cod = document.querySelector('#codiceOrdine').value;
+                let desc = document.querySelector('#descrizione').value;
+                let pezzi = document.querySelector('#pezzi').value;
+                const stringa = cod + ";" + desc + ";" + pezzi;
+
+                li.innerHTML = stringa;
+                // Add new item to task list
+                document.querySelector('#ordini').append(li);
+                // Clear input field
+                document.querySelector('#codiceOrdine').value = '';
+                document.querySelector('#descrizione').value = '';
+                document.querySelector('#pezzi').value = '';
+
+                // Stop form from submitting
+                return false;
+            };
+        });
+
+        function salva() {
+            let nome1 = document.querySelector('#codiceOrdine').value;
+            let nome2 = document.querySelector('#descrizione').value;
+            let nome3 = document.querySelector('#pezzi').value;
+            const stringa = nome1 + "," + nome2 + "," + nome3;
+            let listaOrdine = document.getElementsByTagName('li');
+            let listaOrdini="";
+            for (i = 0; i < listaOrdine.length; i++)
+                listaOrdini += listaOrdine.item(i).innerHTML + "\n";
+
+            let link = document.createElement('a');
+            link.download = 'Ordini.txt';
+            let blob = new Blob([listaOrdini], { type: 'text/plain' });
+            link.href = URL.createObjectURL(blob);
+            link.click();
+            URL.revokeObjectURL(link.href);
+        };
+        function reset() {
+            const list = document.querySelector('ul');
+            list.innerHTML = '';
+        };
+    </script>
+</head>
+
+<body class="testo">
+
+    <h1 id="titolo">Creazione Ordine PLC</h1>
+    <ul class="testo" id="ordini"></ul>
+
+    <form >
+        <label for="CodiceOrdine">Codice Ordine:</label>
+        <input class="testo" autofocus id="codiceOrdine" placeholder="Max 20 caratteri" type="text">
+        <label class="testo" for="descrizione">Descrizione Ordine:</label>
+        <input class="testo" id="descrizione" placeholder="Max 20 caratteri" type="text">
+        <label class="testo" for="pezzi">Pezzi:</label>
+        <input class="testo" id="pezzi" style="width: 150px;" placeholder="max 99999" type="number" min="1" max="99999"><br><br>
+        <input type="submit" class="testo" value="Aggiungi riga">
+    </form>
+    <center>
+        <button class="testo" onclick="reset()">Reset</button>
+
+        <button class="testo" onclick="salva()">Salva su file</button>
+    </center>
+</body>
+
+</html>
