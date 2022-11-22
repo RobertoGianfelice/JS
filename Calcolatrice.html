@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Esercizio basato su: https://www.codingcreativo.it/en/javascript-calculator/ -->
+
+    <meta charset="UTF-8">
+    <title>La mia Calc</title>
+    <style>
+        .content {
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+
+        .display {
+            background: none;
+            color: #175c97;
+            font-size: 24pt;
+            border: #175c97 solid 2px;
+            margin: 4px 2px;
+            width: 204px;
+            height: 40px;
+        }
+
+        .key {
+            background-color: #a5cff3;
+            color: #175c97;
+            font-size: 22pt;
+            border: none;
+            margin: 4px 2px;
+            height: 40px;
+            width: 46px;
+        }
+
+        .doubleKey {
+            background-color: #a5cff3;
+            color: #175c97;
+            font-size: 22pt;
+            border: none;
+            margin: 4px 2px;
+            height: 40px;
+            width: 100px;
+        }
+
+        .equal {
+            width: 208px;
+        }
+    </style>
+    <script>
+        function n(idBottone) {
+            document.getElementById("operations").value += idBottone;
+        }
+        function resetAll() {
+            document.getElementById("operations").value = "";
+        }
+        function op() {
+            document.getElementById("operations").value = eval(document.getElementById("operations").value);
+        }
+        function inverter() {
+            document.getElementById("operations").value = eval("-1*" + document.getElementById("operations").value);
+        }
+
+    </script>
+</head>
+
+<body style="text-align: center;">
+    <div class="content"><input type="text" name="display" id="operations" readonly="readonly" class="display"></div>
+
+    <div class="content">
+        <div class="content">
+            <input type="submit" id="7" value="7" onclick="n(this.id)" class="key">
+            <input type="submit" id="8" value="8" onclick="n(this.id)" class="key">
+            <input type="submit" id="9" value="9" onclick="n(this.id)" class="key">
+            <input type="submit" id="/" value="/" onclick="n(this.id)" class="key">
+        </div>
+        <div class="content">
+            <input type="submit" id="4" value="4" onclick="n(this.id)" class="key">
+            <input type="submit" id="5" value="5" onclick="n(this.id)" class="key">
+            <input type="submit" id="6" value="6" onclick="n(this.id)" class="key">
+            <input type="submit" id="*" value="*" onclick="n(this.id)" class="key">
+        </div>
+        <div class="content">
+            <input type="submit" id="1" value="1" onclick="n(this.id)" class="key">
+            <input type="submit" id="2" value="2" onclick="n(this.id)" class="key">
+            <input type="submit" id="3" value="3" onclick="n(this.id)" class="key">
+            <input type="submit" id="-" value="-" onclick="n(this.id)" class="key">
+        </div>
+        <div class="content">
+            <input type="submit" id="inverter" value="+/-" onclick="inverter()" class="key">
+            <input type="submit" id="0" value="0" onclick="n(this.id)" class="key">
+            <input type="submit" id="." value="." onclick="n(this.id)" class="key">
+            <input type="submit" id="+" value="+" onclick="n(this.id)" class="key">
+        </div>
+        <div class="content">
+            <input type="submit" id="(" value="(" onclick="n(this.id)" class="key">
+            <input type="submit" id=")" value=")" onclick="n(this.id)" class="key">
+            <input type="submit" id="C" value="Canc" onclick="resetAll()" class="doubleKey">
+        </div>
+
+        <div class="content">
+            <button value="=" onclick="op()" class="equal key">=</button>
+        </div>
+    </div>
+</body>
+
+</html>
