@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        function myFunction() {
+            document.getElementById("demo").innerHTML = "Hello World";
+        }
+
+        function aggiungi() {
+            const li = document.createElement('li');
+            li.innerHTML = document.getElementById("task").value;
+            // Add new item to task list
+            document.getElementById('tasks').append(li);
+            document.getElementById('task').value="";
+            document.getElementById('task').placeholder="New Task";
+        }
+
+    </script>
+    <title>Tasks</title>
+</head>
+
+<body>
+    <h1>Lista della spesa</h1>
+    <ul id="tasks">
+    </ul>
+    <input id="task" placeholder="New Task" type="text" value="">
+    <button onclick="aggiungi()">aggiungi</button>
+</body>
+
+</html>
