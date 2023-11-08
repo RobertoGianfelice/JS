@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        function aggiungi() {
+            const nuovariga = document.createElement('tr');
+            const nuovacellaCosa = document.createElement("td");
+            const nuovacellaQuanto = document.createElement("td");
+
+            nuovacellaCosa.innerHTML = document.getElementById("cosa").value;
+            nuovacellaQuanto.innerHTML = document.getElementById("quanto").value;
+
+            nuovariga.append(nuovacellaCosa);
+            nuovariga.append(nuovacellaQuanto);
+
+            // Add new item to task list
+            document.getElementById('lista').append(nuovariga);
+            document.getElementById('cosa').value = "";
+            document.getElementById('cosa').placeholder = "Cosa Comprare";
+            document.getElementById('quanto').value = "";
+            document.getElementById('quanto').placeholder = "Quanto";
+
+        }
+        function cancellaLista() {
+            const list = document.getElementById("lista");
+
+            while (list.hasChildNodes()) {
+                list.removeChild(list.firstChild);
+            }
+        }
+        function cancellaUltimo() {
+            const list = document.getElementById("lista");
+
+            list.removeChild(list.lastElementChild);
+        }
+
+
+    </script>
+    <title>Tasks</title>
+</head>
+
+<body>
+    <h1>Lista della spesa</h1>
+    <table id="lista" border="1">
+    </table>
+    <input id="cosa" placeholder="Cosa Comprare" type="text" value="">
+    <input id="quanto" placeholder="Quanto" type="text" value=""><br>
+
+    <button onclick="aggiungi()">aggiungi</button><br>
+    <button onclick="cancellaUltimo()">Undo</button>
+
+    <button onclick="cancellaLista()">cancella lista</button>
+
+
+</body>
+
+</html>
