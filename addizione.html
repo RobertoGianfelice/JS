@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esercizio1</title>
+
+  <script>
+    function somma() {
+      let valore1=parseInt(document.getElementById("addendo1").value);
+      let valore2=parseInt(document.getElementById("addendo2").value);
+      let risultato=valore1+valore2;
+      document.getElementById("risultato").innerHTML=risultato;     
+    }
+  </script>
+</head>
+<body>
+  <h1>Calcolatrice base</h1>
+
+  <form action="">
+    Addendo1: <input type="text" id="addendo1">
+    Addendo2: <input type="text" id="addendo2">
+  </form>
+  <button onclick="somma()">Somma</button>
+
+  <h1 id="risultato"></h1>
+  
+</body>
+</html>

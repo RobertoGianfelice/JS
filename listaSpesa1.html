@@ -3,24 +3,22 @@
 
 <head>
     <script>
-        function myFunction() {
-            document.getElementById("demo").innerHTML = "Hello World";
-        }
 
         function aggiungi() {
-            const li = document.createElement('li');
-            li.innerHTML = document.getElementById("task").value;
+            const elemento = document.createElement('li');
+            elemento.innerHTML = document.getElementById("task").value;
             // Add new item to task list
-            document.getElementById('tasks').append(li);
+            document.getElementById('tasks').append(elemento);
             document.getElementById('task').value="";
             document.getElementById('task').placeholder="New Task";
+            document.getElementById('sfondo').style.backgroundColor='red';
         }
 
     </script>
     <title>Tasks</title>
 </head>
 
-<body>
+<body id="sfondo">
     <h1>Lista della spesa</h1>
     <ul id="tasks">
     </ul>

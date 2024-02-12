@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script>
+            function cambiaColore() {
+                const colore=document.getElementById("SceltaUtente").value;
+                document.getElementById("corpoPagina").style.backgroundColor=colore;
+            }
+        </script>
+        <title>Cambia Sfondo</title>
+    </head>
+    <body id="corpoPagina">
+        <h1 id="hello">Hello!</h1>
+        Scrivi <input type="text" id="SceltaUtente" placeholder="Inserisci un colore">
+        <button onclick="cambiaColore()">bottone</button>
+    </body>
+</html>

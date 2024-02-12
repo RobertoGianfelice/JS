@@ -3,14 +3,12 @@
 
 <head>
     <!-- Esercizio basato su: https://www.codingcreativo.it/en/javascript-calculator/ -->
-<!--- Prova github-->
     <meta charset="UTF-8">
     <title>La mia Calc</title>
     <style>
         .content {
             margin-left: auto;
             margin-right: auto;
-
         }
 
         .display {
@@ -48,14 +46,59 @@
         }
     </style>
     <script>
+        const operazioni = new Array("+", "-", "*", "/");
+        const parentesi =new Array("(", ")");
+        let inserimento=true;
+        let operazione=false;
         function n(idBottone) {
+            if (operazione && operazioni.includes(idBottone)) {
+                // non si può inserire un'operazione dopo un'operazione
+                return;
+            }
+            if ( operazioni.includes(idBottone) && 
+                 document.getElementById("operations").value=="") {
+                // non si può inserire un'operazione sul display vuoto
+                return;
+            }
+            if (!operazione && idBottone=="(") {
+                // non si può inserire una parentesi aperta dopo un numero
+                return;
+            }
+            if (operazione && idBottone==")") {
+                // non si può inserire una parentesi chiusa dopo una operazione
+                return;
+            }
+            if (operazioni.includes(idBottone)) {
+                // è stata selezionata una operazione
+                operazione=true;
+            } else {
+                // non è stata selezionata una operazione
+                operazione=false;
+            }
+            if ( !inserimento) {
+                // è stata digitata la prima cifra di una nuova operazione. 
+                // il display va azzerato
+                document.getElementById("operations").value= "";
+                inserimento=true;
+            }
             document.getElementById("operations").value += idBottone;
         }
         function resetAll() {
             document.getElementById("operations").value = "";
         }
         function op() {
-            document.getElementById("operations").value = eval(document.getElementById("operations").value);
+            let risultato=""
+            try {
+                risultato=eval(document.getElementById("operations").value);
+            }
+            catch(err) {
+                document.getElementById("operations").value = err.name;
+                document.getElementById("stato").innerHTML = err.name;
+                return;
+            }
+            inserimento=false;
+
+            document.getElementById("operations").value = risultato;
         }
         function inverter() {
             document.getElementById("operations").value = eval("-1*" + document.getElementById("operations").value);
@@ -69,39 +112,38 @@
 
     <div class="content">
         <div class="content">
-            <input type="submit" id="7" value="7" onclick="n(this.id)" class="key">
-            <input type="submit" id="8" value="8" onclick="n(this.id)" class="key">
-            <input type="submit" id="9" value="9" onclick="n(this.id)" class="key">
-            <input type="submit" id="/" value="/" onclick="n(this.id)" class="key">
+            <button id="7" onclick="n(this.id)" class="key">7</button>
+            <button id="8" onclick="n(this.id)" class="key">8</button>
+            <button id="9" onclick="n(this.id)" class="key">9</button>
+            <button id="/" onclick="n(this.id)" class="key">/</button>
         </div>
         <div class="content">
-            <input type="submit" id="4" value="4" onclick="n(this.id)" class="key">
-            <input type="submit" id="5" value="5" onclick="n(this.id)" class="key">
-            <input type="submit" id="6" value="6" onclick="n(this.id)" class="key">
-            <input type="submit" id="*" value="*" onclick="n(this.id)" class="key">
+            <button id="4" onclick="n(this.id)" class="key">4</button>
+            <button id="5" onclick="n(this.id)" class="key">5</button>
+            <button id="6" onclick="n(this.id)" class="key">6</button>
+            <button id="*" onclick="n(this.id)" class="key">*</button>
         </div>
         <div class="content">
-            <input type="submit" id="1" value="1" onclick="n(this.id)" class="key">
-            <input type="submit" id="2" value="2" onclick="n(this.id)" class="key">
-            <input type="submit" id="3" value="3" onclick="n(this.id)" class="key">
-            <input type="submit" id="-" value="-" onclick="n(this.id)" class="key">
+            <button id="1" onclick="n(this.id)" class="key">1</button>
+            <button id="2" onclick="n(this.id)" class="key">2</button>
+            <button id="3" onclick="n(this.id)" class="key">3</button>
+            <button id="-" onclick="n(this.id)" class="key">-</button>
         </div>
         <div class="content">
-            <input type="submit" id="inverter" value="+/-" onclick="inverter()" class="key">
-            <input type="submit" id="0" value="0" onclick="n(this.id)" class="key">
-            <input type="submit" id="." value="." onclick="n(this.id)" class="key">
-            <input type="submit" id="+" value="+" onclick="n(this.id)" class="key">
+            <button id="inverter" onclick="inverter()" class="key">+/-</button>
+            <button id="0" onclick="n(this.id)" class="key">0</button>
+            <button id="." onclick="n(this.id)" class="key">.</button>
+            <button id="+" onclick="n(this.id)" class="key">+</button>
         </div>
         <div class="content">
-            <input type="submit" id="(" value="(" onclick="n(this.id)" class="key">
-            <input type="submit" id=")" value=")" onclick="n(this.id)" class="key">
-            <input type="submit" id="C" value="Canc" onclick="resetAll()" class="doubleKey">
-        </div>
-
-        <div class="content">
+            <button id="(" onclick="n(this.id)" class="key">(</button>
+            <button id=")" onclick="n(this.id)" class="key">)</button>
+            <button id="C" onclick="resetAll()" class="doubleKey">Canc</button>
+        </div> 
             <button value="=" onclick="op()" class="equal key">=</button>
         </div>
     </div>
+    <p id="stato"></p>
 </body>
 
 </html>

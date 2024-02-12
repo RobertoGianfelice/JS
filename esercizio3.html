@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script>
+            function funct() {
+                const nuovaRiga = document.createElement('tr');
+                const nuovaCella1 = document.createElement("td");
+                const nuovaCella2 = document.createElement("td");
+                v2.innerHTML = document.getElementById("input1").value;
+                v3.innerHTML = document.getElementById("input2").value;
+                v1.append(v2);
+                v1.append(v3);
+                document.getElementById('tt').append(v1);
+            }
+        </script>
+        <title>Tasks</title>
+    </head>
+
+    <body>
+        <h1>Lista della spesa</h1>
+        <table id="tt" border="1">
+        </table>
+        <input id="input1" type="text" value="">
+        <input id="input2" type="text" value=""><br>
+        <button onclick="funct()">aggiungi</button><br>
+    </body>
+</html>

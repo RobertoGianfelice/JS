@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<style>
+   #quantity {
+    display: nome;
+   } 
+</style>
 <head>
     <script>
         function aggiungi() {
@@ -9,6 +13,7 @@
             const nuovacellaQuanto = document.createElement("td");
 
             nuovacellaCosa.innerHTML = document.getElementById("cosa").value;
+            nuovacellaQuanto.className="quantity";
             nuovacellaQuanto.innerHTML = document.getElementById("quanto").value;
 
             nuovariga.append(nuovacellaCosa);
@@ -20,22 +25,22 @@
             document.getElementById('cosa').placeholder = "Cosa Comprare";
             document.getElementById('quanto').value = "";
             document.getElementById('quanto').placeholder = "Quanto";
-
         }
         function cancellaLista() {
             const list = document.getElementById("lista");
-
             while (list.hasChildNodes()) {
                 list.removeChild(list.firstChild);
             }
         }
         function cancellaUltimo() {
             const list = document.getElementById("lista");
-
             list.removeChild(list.lastElementChild);
         }
+        function mostraQuantity() {
+            document.getElementsByClassName("quantity");
+            
 
-
+        }
     </script>
     <title>Tasks</title>
 </head>
@@ -47,7 +52,9 @@
     <input id="cosa" placeholder="Cosa Comprare" type="text" value="">
     <input id="quanto" placeholder="Quanto" type="text" value=""><br>
 
-    <button onclick="aggiungi()">aggiungi</button><br>
+    <button onclick="aggiungi()">Aggiungi</button><br>
+    <button onclick="mostraQuantity()">Mostra Quantità</button><br>
+
     <button onclick="cancellaUltimo()">Undo</button>
 
     <button onclick="cancellaLista()">cancella lista</button>

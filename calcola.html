@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SWomma Magica</title>
+    <style>
+        #magico {
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+            background-color: red;
+        }
+    </style>
+    <script>
+        function Unosomma() {
+            const addendo1=document.getElementById("valore1").value;
+            const addendo2=document.getElementById("valore2").value;
+            const risultato= addendo1 + "+" + addendo2;
+            document.getElementById("risultato").innerHTML=eval(risultato);
+        }
+    </script>
+</head>
+<body>
+    : <input type="text" id="valore1">
+    Due: <input type="text" id="valore2">
+    <h3 id="risultato"></h3>
+    <div onmouseover="somma()" id="magico"></div>
+</body>
+</html>
