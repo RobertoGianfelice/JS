@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pallina4BI</title>
+  <style>
+    #pallina{
+      background-color: red;
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+      position: absolute;
+      left: 100px;
+      top: 50px;
+    }
+  </style>
+  <script>
+    let punti=0;
+    function scappa() {
+      document.getElementById("pallina").style.left=
+        (Math.random()*500) + "px";
+      document.getElementById("pallina").style.top=
+        (Math.random()*400) + "px";
+    }
+    function conta() {
+      punti+=1;
+      document.getElementById("points").innerHTML=
+        "Score: " + punti;
+    }
+    function aspetta() {
+      ritardo=500-punti*50;
+      setTimeout(scappa,ritardo);
+    }
+  </script>
+</head>
+<body>
+  <h1 id="points">Score: 0</h1>
+  <div id="pallina" onmouseover="aspetta()"
+       onclick="conta()"></div>
+
+  
+</body>
+</html>
