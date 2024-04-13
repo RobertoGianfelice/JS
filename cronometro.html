@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cronometro</title>
+  <style>
+    .bottone {
+      top:250px;
+      width: 200px;
+      height: 50px;
+      background-color: red;
+      border-radius: 15%;
+      position: absolute;
+      color: white;
+      font-size: 40px;
+      text-align: center;
+    }
+
+    #start {
+      left: 100px;
+    }
+    #stop {
+      left: 550px;
+    }
+    h1 {
+      font-size: 50px;
+    }
+    h2 {
+      font-size: 40px;
+    }
+  </style>
+  <script>
+    let secondi=0;
+    let minuti=0;
+    let myTime=0;
+    function parti() {
+      myTime = setInterval(myTimer ,1000);
+    }
+    function fermati() {
+      clearTimeout(myTime);
+    }
+    function myTimer() {
+      secondi+=1;
+      document.getElementById("secondi").innerHTML=secondi;
+    }
+  </script>
+</head>
+<body>
+  <h1 align="center">Cronometro</h1>
+  <table align="center">
+    <tr>
+      <td><h2 id="minuti">0</h2></td>
+      <td><h2>:</h2></td>
+      <td><h2 id="secondi">0</h2></td></tr>
+  </table>
+  <div>
+    <div class="bottone" id="start" onclick="parti()">START</div>
+    <div class="bottone" id="stop" onclick="fermati()">STOP</div>
+  </div>
+</body>
+</html>
