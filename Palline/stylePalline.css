@@ -1,0 +1,36 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+canvas {
+    border: 3px solid black;
+    position:absolute;
+    left:10px;
+    top:25px;
+}
+
+#elenco{
+    border: 3px solid red;
+    position: absolute;
+    left: 1250px;
+    top: 25px;
+    width: 250px;
+    display: none;
+}
+#logoScuola {
+    position: absolute;
+    left: 18px;
+    top: 742px;
+    width: 450px;
+    display: none;
+}
+#logoStreetScience {
+    position: absolute;
+    left: 962px;
+    top: 672px;
+    width: 250px;
+    display: none;
+}
