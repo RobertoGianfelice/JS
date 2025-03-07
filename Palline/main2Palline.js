@@ -7,6 +7,7 @@ let balls = [];
 let vincitori = [];
 let counter=0;
 let fermaAnimazione=false;
+let numeroMagliette=20;
 
 let ctx = canvas.getContext('2d');
 class Ball {
@@ -70,7 +71,7 @@ function mescola() {
     for (i = 1; i <= 58; i++) {
         numeri.push(i);
     }
-    for (i=0; i<21; i++){
+    for (i=0; i<numeroMagliette; i++){
         casuale=Math.floor(Math.random()*numeri.length);
         numeriMescolati.push(numeri[casuale]);
         numeri.splice(casuale,1);
@@ -107,21 +108,21 @@ let loop = () => {
     if (fermaAnimazione) {
         ctx.font = 'bold 102px sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillStyle = "red";
+        ctx.fillStyle = "#3754AD";
         ctx.fillText('Le magliette vanno a....', 600, 200);
         ctx.font = 'bold 92px sans-serif';
+        ctx.fillStyle = "#3775AD";
 
         stringa = "";
-        for (i = 0; i < 20; i++) {
+        for (i = 0; i < numeroMagliette; i++) {
             if (stringa == "") {
                 stringa = stringa + vincitori[i];
             } else {
-                stringa = stringa + "-" + vincitori[i];
+                stringa = stringa + " - " + vincitori[i];
             }
             if ((i + 1) % 5 == 0) {
-                ctx.fillText(stringa, 600, 300 + 20 * i);
+                ctx.fillText(stringa, 600, 240 + 20 * i);
                 stringa = "";
-
             }
         }
     } 
