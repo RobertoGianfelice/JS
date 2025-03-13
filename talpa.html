@@ -3,72 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Talpa1</title>
+    <title>Talpa</title>
+
     <style>
         .pallina {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             background-color: red;
-            position: absolute;
             border-radius: 100%;
+            position: absolute;
         }
         .riga1 {
-            top: 50px;
+            top: 100px;
         }
         .riga2 {
-            top: 150px;
+            top: 200px;
         }
         .riga3 {
-            top: 250px;
+            top: 300px;
         }
-
-        .colonna1 {
+        .colonna1{
             left: 100px;
         }
-        .colonna2 {
+        .colonna2{
             left: 200px;
         }
         .colonna3 {
-            left: 300px;
+            left:300px;
         }
     </style>
     <script>
         let punti=0;
-        let myVar = setInterval(myTimer ,1000);
+        let myVar=setInterval(colora,1000);
         let idPrevPallina="p1";
-        function myTimer() {
-            pallina=(Math.floor(Math.random()*10));
-            idPallina="p"+pallina;
+        function cliccato(idPalla) {
+            if (idPalla.style.backgroundColor=="green") {
+                punti=punti+1;
+            } else {
+                punti=punti-1;
+            }
+            document.getElementById("punteggio").innerHTML="Score: " + punti;
+        }
+        function colora() {
+            pallina=(Math.floor(Math.random()*10)%9)+1;
+            idPallina="p" + pallina;
             document.getElementById(idPrevPallina).style.backgroundColor="red";
             document.getElementById(idPallina).style.backgroundColor="green";
             idPrevPallina=idPallina;
-        }
-        function cliccato(scatola) {
-            if (scatola.style.backgroundColor=="green") {
-                punti+=1;
-                document.getElementById("punteggio").innerHTML="Score: " + punti;
-            }
-
         }
     </script>
 </head>
 <body>
     <h1 id="punteggio">Score: 0</h1>
     <div>
-        <div class="pallina riga1 colonna1" id="p1" onclick="cliccato(this)"></div>
-        <div class="pallina riga1 colonna2" id="p2" onclick="cliccato(this)"></div>
-        <div class="pallina riga1 colonna3" id="p3" onclick="cliccato(this)"></div>
+        <div id="p1" class="pallina riga1 colonna1" onclick="cliccato(this)"></div>
+        <div id="p2" class="pallina riga1 colonna2" onclick="cliccato(this)"></div>
+        <div id="p3" class="pallina riga1 colonna3" onclick="cliccato(this)"></div>
     </div>
     <div>
-        <div class="pallina riga2 colonna1" id="p4" onclick="cliccato(this)"></div>
-        <div class="pallina riga2 colonna2" id="p5" onclick="cliccato(this)"></div>
-        <div class="pallina riga2 colonna3" id="p6" onclick="cliccato(this)"></div>
+        <div id="p4" class="pallina riga2 colonna1" onclick="cliccato(this)"></div>
+        <div id="p5" class="pallina riga2 colonna2" onclick="cliccato(this)"></div>
+        <div id="p6" class="pallina riga2 colonna3" onclick="cliccato(this)"></div>
     </div>
     <div>
-        <div class="pallina riga3 colonna1" id="p7" onclick="cliccato(this)"></div>
-        <div class="pallina riga3 colonna2" id="p8" onclick="cliccato(this)"></div>
-        <div class="pallina riga3 colonna3" id="p9" onclick="cliccato(this)"></div>
+        <div id="p7" class="pallina riga3 colonna1" onclick="cliccato(this)"></div>
+        <div id="p8" class="pallina riga3 colonna2" onclick="cliccato(this)"></div>
+        <div id="p9" class="pallina riga3 colonna3" onclick="cliccato(this)"></div>
     </div>
+
     
 </body>
 </html>
