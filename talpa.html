@@ -1,77 +1,311 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Talpa</title>
 
     <style>
-        .pallina {
-            width: 40px;
-            height: 40px;
-            background-color: red;
-            border-radius: 100%;
-            position: absolute;
-        }
-        
-        .riga1 {
-            top: 100px;
-        }
-        .riga2 {
+        .campo {
+            position: relative;
+            left: 115px;
             top: 200px;
         }
-        .riga3 {
-            top: 300px;
+
+        .pallina {
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+            background-color: blueviolet;
+            position: absolute;
         }
-        .colonna1{
+
+        .riga1 {
+            top: 150px;
+        }
+
+        .riga2 {
+            top: 250px;
+        }
+
+        .riga3 {
+            top: 350px;
+        }
+
+        .colonna1 {
             left: 100px;
         }
-        .colonna2{
+
+        .colonna2 {
             left: 200px;
         }
+
         .colonna3 {
-            left:300px;
+            left: 300px;
+        }
+
+        #digit1 {
+            position: relative;
+            left: 370px;
+            top: 150px;
+        }
+
+        #digit2 {
+            position: relative;
+            left: 270px;
+            top: 150px;
+        }
+
+
+        .segment {
+            position: absolute;
+            background-color: white;
+        }
+
+        #sign {
+            top: 68px;
+            left: -60px;
+            background-color: white;
+        }
+
+        .h {
+            width: 50px;
+            height: 10px;
+        }
+
+        .v {
+            width: 10px;
+            height: 50px;
+        }
+
+        .a {
+            top: 10px;
+            left: 15px;
+        }
+
+        .b {
+            top: 20px;
+            left: 65px;
+        }
+
+        .c {
+            top: 75px;
+            left: 65px;
+        }
+
+        .d {
+            top: 125px;
+            left: 15px;
+        }
+
+        .e {
+            top: 75px;
+            left: 5px;
+        }
+
+        .f {
+            top: 20px;
+            left: 5px;
+        }
+
+        .g {
+            top: 68px;
+            left: 15px;
         }
     </style>
     <script>
-        let punti=0;
-        let myVar=setInterval(colora,1000);
-        let idPrevPallina="p1";
-        function cliccato(idPalla) {
-            if (idPalla.style.backgroundColor=="green") {
-                punti=punti+1;
-            } else {
-                punti=punti-1;
+        let punti = 0;
+        let myVar = setInterval(colora, 1000);
+        let idPrevPallina = "p1";
+        let coloreIniziale = "red";
+
+        function init() {
+            let idP;
+            for (let i = 1; i < 10; i++) {
+                idP = "p" + i;
+                document.getElementById(idP).style.backgroundColor = coloreIniziale;
             }
-            document.getElementById("punteggio").innerHTML="Score: " + punti;
+            display(0, "u");
+            display(0, "d");
+
+        }
+        function cliccato(idPalla) {
+            colorePallina = idPalla.style.backgroundColor;
+            switch (colorePallina) {
+                case "green":
+                    punti += 1;
+                    break;
+                case "red":
+                    punti -= 1;
+                    break;
+                case "blue":
+                    punti -= 1;
+                    break;
+                default:
+                    break;
+            }
+
+            display(punti, "segno");
+            display(Math.abs(punti % 10), "u");
+            display(Math.floor(Math.abs(punti) / 10), "d");
         }
         function colora() {
-            pallina=(Math.floor(Math.random()*10)%9)+1;
-            idPallina="p" + pallina;
-            document.getElementById(idPrevPallina).style.backgroundColor="red";
-            document.getElementById(idPallina).style.backgroundColor="green";
-            idPrevPallina=idPallina;
+            pallina = (Math.floor(Math.random() * 10) % 9) + 1;
+            idPallina = "p" + pallina;
+            document.getElementById(idPrevPallina).style.backgroundColor = "red";
+            document.getElementById(idPallina).style.backgroundColor = "green";
+            idPrevPallina = idPallina;
         }
+        function display(valore, digit) {
+            if (digit == "segno") {
+                if (valore < 0) {
+                    document.getElementById("sign").style.backgroundColor = "red";
+                } else {
+                    document.getElementById("sign").style.backgroundColor = "white";
+                }
+            } else {
+
+                switch (valore) {
+                    case 0:
+                        document.getElementById(digit + "a").style.backgroundColor = "red";
+                        document.getElementById(digit + "b").style.backgroundColor = "red";
+                        document.getElementById(digit + "c").style.backgroundColor = "red";
+                        document.getElementById(digit + "d").style.backgroundColor = "red";
+                        document.getElementById(digit + "e").style.backgroundColor = "red";
+                        document.getElementById(digit + "f").style.backgroundColor = "red";
+                        document.getElementById(digit + "g").style.backgroundColor = "white";
+                        break;
+                    case 1:
+                        document.getElementById(digit + "a").style.backgroundColor = "white";
+                        document.getElementById(digit + "b").style.backgroundColor = "red";
+                        document.getElementById(digit + "c").style.backgroundColor = "red";
+                        document.getElementById(digit + "d").style.backgroundColor = "white";
+                        document.getElementById(digit + "e").style.backgroundColor = "white";
+                        document.getElementById(digit + "f").style.backgroundColor = "white";
+                        document.getElementById(digit + "g").style.backgroundColor = "white";
+                        break;
+                    case 2:
+                        document.getElementById(digit + "a").style.backgroundColor = "red";
+                        document.getElementById(digit + "b").style.backgroundColor = "red";
+                        document.getElementById(digit + "c").style.backgroundColor = "white";
+                        document.getElementById(digit + "d").style.backgroundColor = "red";
+                        document.getElementById(digit + "e").style.backgroundColor = "red";
+                        document.getElementById(digit + "f").style.backgroundColor = "white";
+                        document.getElementById(digit + "g").style.backgroundColor = "red";
+                        break;
+                    case 3:
+                        document.getElementById(digit + "a").style.backgroundColor = "red";
+                        document.getElementById(digit + "b").style.backgroundColor = "red";
+                        document.getElementById(digit + "c").style.backgroundColor = "red";
+                        document.getElementById(digit + "d").style.backgroundColor = "red";
+                        document.getElementById(digit + "e").style.backgroundColor = "white";
+                        document.getElementById(digit + "f").style.backgroundColor = "white";
+                        document.getElementById(digit + "g").style.backgroundColor = "red";
+                        break;
+                    case 4:
+                        document.getElementById(digit + "a").style.backgroundColor = "white";
+                        document.getElementById(digit + "b").style.backgroundColor = "red";
+                        document.getElementById(digit + "c").style.backgroundColor = "red";
+                        document.getElementById(digit + "d").style.backgroundColor = "white";
+                        document.getElementById(digit + "e").style.backgroundColor = "white";
+                        document.getElementById(digit + "f").style.backgroundColor = "red";
+                        document.getElementById(digit + "g").style.backgroundColor = "red";
+                        break;
+                    case 5:
+                        document.getElementById(digit + "a").style.backgroundColor = "red";
+                        document.getElementById(digit + "b").style.backgroundColor = "white";
+                        document.getElementById(digit + "c").style.backgroundColor = "red";
+                        document.getElementById(digit + "d").style.backgroundColor = "red";
+                        document.getElementById(digit + "e").style.backgroundColor = "white";
+                        document.getElementById(digit + "f").style.backgroundColor = "red";
+                        document.getElementById(digit + "g").style.backgroundColor = "red";
+                        break;
+                    case 6:
+                        document.getElementById(digit + "a").style.backgroundColor = "red";
+                        document.getElementById(digit + "b").style.backgroundColor = "white";
+                        document.getElementById(digit + "c").style.backgroundColor = "red";
+                        document.getElementById(digit + "d").style.backgroundColor = "red";
+                        document.getElementById(digit + "e").style.backgroundColor = "red";
+                        document.getElementById(digit + "f").style.backgroundColor = "red";
+                        document.getElementById(digit + "g").style.backgroundColor = "red";
+                        break;
+                    case 7:
+                        document.getElementById(digit + "a").style.backgroundColor = "red";
+                        document.getElementById(digit + "b").style.backgroundColor = "red";
+                        document.getElementById(digit + "c").style.backgroundColor = "red";
+                        document.getElementById(digit + "d").style.backgroundColor = "white";
+                        document.getElementById(digit + "e").style.backgroundColor = "white";
+                        document.getElementById(digit + "f").style.backgroundColor = "white";
+                        document.getElementById(digit + "g").style.backgroundColor = "white";
+                        break;
+                    case 8:
+                        document.getElementById(digit + "a").style.backgroundColor = "red";
+                        document.getElementById(digit + "b").style.backgroundColor = "red";
+                        document.getElementById(digit + "c").style.backgroundColor = "red";
+                        document.getElementById(digit + "d").style.backgroundColor = "red";
+                        document.getElementById(digit + "e").style.backgroundColor = "red";
+                        document.getElementById(digit + "f").style.backgroundColor = "red";
+                        document.getElementById(digit + "g").style.backgroundColor = "red";
+                        break;
+                    case 9:
+                        document.getElementById(digit + "a").style.backgroundColor = "red";
+                        document.getElementById(digit + "b").style.backgroundColor = "red";
+                        document.getElementById(digit + "c").style.backgroundColor = "red";
+                        document.getElementById(digit + "d").style.backgroundColor = "red";
+                        document.getElementById(digit + "e").style.backgroundColor = "white";
+                        document.getElementById(digit + "f").style.backgroundColor = "red";
+                        document.getElementById(digit + "g").style.backgroundColor = "red";
+                        break;
+                }
+            }
+        }
+
     </script>
 </head>
-<body>
-    <h1 id="punteggio">Score: 0</h1>
-    <div>
+
+<body onload="init()">
+
+    <div id="digit2">
+        <div class="segment h" id="sign"></div>
+        <div class="segment h a" id="da"></div>
+        <div class="segment v b" id="db"></div>
+        <div class="segment v c" id="dc"></div>
+        <div class="segment h d" id="dd"></div>
+        <div class="segment v e" id="de"></div>
+        <div class="segment v f" id="df"></div>
+        <div class="segment h g" id="dg"></div>
+    </div>
+
+    <div id="digit1">
+        <div class="segment h a" id="ua"></div>
+        <div class="segment v b" id="ub"></div>
+        <div class="segment v c" id="uc"></div>
+        <div class="segment h d" id="ud"></div>
+        <div class="segment v e" id="ue"></div>
+        <div class="segment v f" id="uf"></div>
+        <div class="segment h g" id="ug"></div>
+    </div>
+
+    <div class="campo">
         <div id="p1" class="pallina riga1 colonna1" onclick="cliccato(this)"></div>
         <div id="p2" class="pallina riga1 colonna2" onclick="cliccato(this)"></div>
         <div id="p3" class="pallina riga1 colonna3" onclick="cliccato(this)"></div>
     </div>
-    <div>
+    <div class="campo">
         <div id="p4" class="pallina riga2 colonna1" onclick="cliccato(this)"></div>
         <div id="p5" class="pallina riga2 colonna2" onclick="cliccato(this)"></div>
         <div id="p6" class="pallina riga2 colonna3" onclick="cliccato(this)"></div>
     </div>
-    <div>
+    <div class="campo">
         <div id="p7" class="pallina riga3 colonna1" onclick="cliccato(this)"></div>
         <div id="p8" class="pallina riga3 colonna2" onclick="cliccato(this)"></div>
         <div id="p9" class="pallina riga3 colonna3" onclick="cliccato(this)"></div>
     </div>
+    <h1>Tocca la talpa</h1>
+    <h2>Un punto in più se la pallina è verde presa</h2>
+    <h2>Un punto in meno se la pallina è rossa</h2>
 
-    
 </body>
+
 </html>
