@@ -9,7 +9,7 @@
     <style>
         .campo {
             position: relative;
-            left: 115px;
+            left: 5px;
             top: 200px;
         }
 
@@ -19,6 +19,18 @@
             border-radius: 100%;
             background-color: blueviolet;
             position: absolute;
+        }
+
+        #cronometro {
+            left: 220px;
+            top: 240px;
+            position: relative;
+        }
+
+        #score {
+            left: 10px;
+            top: 180px;
+            position: relative;
         }
 
         .riga1 {
@@ -34,27 +46,59 @@
         }
 
         .colonna1 {
-            left: 100px;
+            left: 50px;
         }
 
         .colonna2 {
-            left: 200px;
+            left: 150px;
         }
 
         .colonna3 {
-            left: 300px;
+            left: 250px;
+        }
+        #gameOver {
+            position: absolute;
+            top: 140px;
+            left:60px;
+            width: 260px;
+            background-color: red;
+            font-size: 30px;
+            display: none;
+        }
+        #ricomincia {
+            position: absolute;
+            top: 430px;
+            left:40px;
+            width: 260px;
+            background-color: lightblue;
+            border-radius: 20%;
+            display: none;
+            font-size: 30px;
         }
 
+        #timer1 {
+            position: absolute;
+            left: 45px;
+            top: 10px;
+        }
+
+        #timer2 {
+            position: absolute;
+            left: 5px;
+            top: 10px;
+        }
+
+
         #digit1 {
-            position: relative;
-            left: 370px;
-            top: 150px;
+            position: absolute;
+            left: 130px;
+            top: 10px;
         }
 
         #digit2 {
-            position: relative;
-            left: 270px;
-            top: 150px;
+            position: absolute;
+            left: 40px;
+            top: 10px;
         }
 
 
@@ -74,12 +118,27 @@
             height: 10px;
         }
 
+        .hs {
+            width: 25px;
+            height: 5px;
+        }
+
         .v {
             width: 10px;
             height: 50px;
         }
 
+        .vs {
+            width: 5px;
+            height: 25px;
+        }
+
         .a {
+            top: 10px;
+            left: 15px;
+        }
+
+        .as {
             top: 10px;
             left: 15px;
         }
@@ -89,13 +148,28 @@
             left: 65px;
         }
 
+        .bs {
+            top: 15px;
+            left: 40px;
+        }
+
         .c {
             top: 75px;
             left: 65px;
         }
 
+        .cs {
+            top: 45px;
+            left: 40px;
+        }
+
         .d {
             top: 125px;
+            left: 15px;
+        }
+
+        .ds {
+            top: 70px;
             left: 15px;
         }
 
@@ -104,19 +178,53 @@
             left: 5px;
         }
 
+        .es {
+            top: 45px;
+            left: 10px;
+        }
+
         .f {
             top: 20px;
             left: 5px;
+        }
+
+        .fs {
+            top: 15px;
+            left: 10px;
         }
 
         .g {
             top: 68px;
             left: 15px;
         }
+
+        .gs {
+            top: 40px;
+            left: 15px;
+        }
     </style>
     <script>
         let punti = 0;
-        let myVar = setInterval(colora, 1000);
+        let myTimerSec = 2;
+        let myColora = setInterval(colora, 1000);
+        let tempoRestante = setInterval(myTimer, 1000);
+        let gameOver = false;
+
+        function myTimer() {
+            if (myTimerSec > 0) {
+                myTimerSec -= 1;
+                display(Math.abs(myTimerSec % 10), "t1");
+                display(Math.floor(myTimerSec / 10), "t2");
+            } else {
+                clearInterval(tempoRestante);
+                clearInterval(myColora);
+                gameOver = true;
+                document.getElementById("gameOver").style.display = "block";
+                document.getElementById("ricomincia").style.display="block";
+            }
+
+        }
+
         let idPrevPallina = "p1";
         let coloreIniziale = "red";
 
@@ -128,9 +236,13 @@
             }
             display(0, "u");
             display(0, "d");
-
+            display(Math.abs(myTimerSec % 10), "t1");
+            display(Math.floor(myTimerSec / 10), "t2");
         }
         function cliccato(idPalla) {
+            if (gameOver) {
+                return;
+            }
             colorePallina = idPalla.style.backgroundColor;
             switch (colorePallina) {
                 case "green":
@@ -166,125 +278,155 @@
                 }
             } else {
 
+                if (digit == "u" || digit == "d") {
+                    acceso = "red";
+                } else {
+                    acceso = "blue";
+                }
                 switch (valore) {
                     case 0:
-                        document.getElementById(digit + "a").style.backgroundColor = "red";
-                        document.getElementById(digit + "b").style.backgroundColor = "red";
-                        document.getElementById(digit + "c").style.backgroundColor = "red";
-                        document.getElementById(digit + "d").style.backgroundColor = "red";
-                        document.getElementById(digit + "e").style.backgroundColor = "red";
-                        document.getElementById(digit + "f").style.backgroundColor = "red";
+                        document.getElementById(digit + "a").style.backgroundColor = acceso;
+                        document.getElementById(digit + "b").style.backgroundColor = acceso;
+                        document.getElementById(digit + "c").style.backgroundColor = acceso;
+                        document.getElementById(digit + "d").style.backgroundColor = acceso;
+                        document.getElementById(digit + "e").style.backgroundColor = acceso;
+                        document.getElementById(digit + "f").style.backgroundColor = acceso;
                         document.getElementById(digit + "g").style.backgroundColor = "white";
                         break;
                     case 1:
                         document.getElementById(digit + "a").style.backgroundColor = "white";
-                        document.getElementById(digit + "b").style.backgroundColor = "red";
-                        document.getElementById(digit + "c").style.backgroundColor = "red";
+                        document.getElementById(digit + "b").style.backgroundColor = acceso;
+                        document.getElementById(digit + "c").style.backgroundColor = acceso;
                         document.getElementById(digit + "d").style.backgroundColor = "white";
                         document.getElementById(digit + "e").style.backgroundColor = "white";
                         document.getElementById(digit + "f").style.backgroundColor = "white";
                         document.getElementById(digit + "g").style.backgroundColor = "white";
                         break;
                     case 2:
-                        document.getElementById(digit + "a").style.backgroundColor = "red";
-                        document.getElementById(digit + "b").style.backgroundColor = "red";
+                        document.getElementById(digit + "a").style.backgroundColor = acceso;
+                        document.getElementById(digit + "b").style.backgroundColor = acceso;
                         document.getElementById(digit + "c").style.backgroundColor = "white";
-                        document.getElementById(digit + "d").style.backgroundColor = "red";
-                        document.getElementById(digit + "e").style.backgroundColor = "red";
+                        document.getElementById(digit + "d").style.backgroundColor = acceso;
+                        document.getElementById(digit + "e").style.backgroundColor = acceso;
                         document.getElementById(digit + "f").style.backgroundColor = "white";
-                        document.getElementById(digit + "g").style.backgroundColor = "red";
+                        document.getElementById(digit + "g").style.backgroundColor = acceso;
                         break;
                     case 3:
-                        document.getElementById(digit + "a").style.backgroundColor = "red";
-                        document.getElementById(digit + "b").style.backgroundColor = "red";
-                        document.getElementById(digit + "c").style.backgroundColor = "red";
-                        document.getElementById(digit + "d").style.backgroundColor = "red";
+                        document.getElementById(digit + "a").style.backgroundColor = acceso;
+                        document.getElementById(digit + "b").style.backgroundColor = acceso;
+                        document.getElementById(digit + "c").style.backgroundColor = acceso;
+                        document.getElementById(digit + "d").style.backgroundColor = acceso;
                         document.getElementById(digit + "e").style.backgroundColor = "white";
                         document.getElementById(digit + "f").style.backgroundColor = "white";
-                        document.getElementById(digit + "g").style.backgroundColor = "red";
+                        document.getElementById(digit + "g").style.backgroundColor = acceso;
                         break;
                     case 4:
                         document.getElementById(digit + "a").style.backgroundColor = "white";
-                        document.getElementById(digit + "b").style.backgroundColor = "red";
-                        document.getElementById(digit + "c").style.backgroundColor = "red";
+                        document.getElementById(digit + "b").style.backgroundColor = acceso;
+                        document.getElementById(digit + "c").style.backgroundColor = acceso;
                         document.getElementById(digit + "d").style.backgroundColor = "white";
                         document.getElementById(digit + "e").style.backgroundColor = "white";
-                        document.getElementById(digit + "f").style.backgroundColor = "red";
-                        document.getElementById(digit + "g").style.backgroundColor = "red";
+                        document.getElementById(digit + "f").style.backgroundColor = acceso;
+                        document.getElementById(digit + "g").style.backgroundColor = acceso;
                         break;
                     case 5:
-                        document.getElementById(digit + "a").style.backgroundColor = "red";
+                        document.getElementById(digit + "a").style.backgroundColor = acceso;
                         document.getElementById(digit + "b").style.backgroundColor = "white";
-                        document.getElementById(digit + "c").style.backgroundColor = "red";
-                        document.getElementById(digit + "d").style.backgroundColor = "red";
+                        document.getElementById(digit + "c").style.backgroundColor = acceso;
+                        document.getElementById(digit + "d").style.backgroundColor = acceso;
                         document.getElementById(digit + "e").style.backgroundColor = "white";
-                        document.getElementById(digit + "f").style.backgroundColor = "red";
-                        document.getElementById(digit + "g").style.backgroundColor = "red";
+                        document.getElementById(digit + "f").style.backgroundColor = acceso;
+                        document.getElementById(digit + "g").style.backgroundColor = acceso;
                         break;
                     case 6:
-                        document.getElementById(digit + "a").style.backgroundColor = "red";
+                        document.getElementById(digit + "a").style.backgroundColor = acceso;
                         document.getElementById(digit + "b").style.backgroundColor = "white";
-                        document.getElementById(digit + "c").style.backgroundColor = "red";
-                        document.getElementById(digit + "d").style.backgroundColor = "red";
-                        document.getElementById(digit + "e").style.backgroundColor = "red";
-                        document.getElementById(digit + "f").style.backgroundColor = "red";
-                        document.getElementById(digit + "g").style.backgroundColor = "red";
+                        document.getElementById(digit + "c").style.backgroundColor = acceso;
+                        document.getElementById(digit + "d").style.backgroundColor = acceso;
+                        document.getElementById(digit + "e").style.backgroundColor = acceso;
+                        document.getElementById(digit + "f").style.backgroundColor = acceso;
+                        document.getElementById(digit + "g").style.backgroundColor = acceso;
                         break;
                     case 7:
-                        document.getElementById(digit + "a").style.backgroundColor = "red";
-                        document.getElementById(digit + "b").style.backgroundColor = "red";
-                        document.getElementById(digit + "c").style.backgroundColor = "red";
+                        document.getElementById(digit + "a").style.backgroundColor = acceso;
+                        document.getElementById(digit + "b").style.backgroundColor = acceso;
+                        document.getElementById(digit + "c").style.backgroundColor = acceso;
                         document.getElementById(digit + "d").style.backgroundColor = "white";
                         document.getElementById(digit + "e").style.backgroundColor = "white";
                         document.getElementById(digit + "f").style.backgroundColor = "white";
                         document.getElementById(digit + "g").style.backgroundColor = "white";
                         break;
                     case 8:
-                        document.getElementById(digit + "a").style.backgroundColor = "red";
-                        document.getElementById(digit + "b").style.backgroundColor = "red";
-                        document.getElementById(digit + "c").style.backgroundColor = "red";
-                        document.getElementById(digit + "d").style.backgroundColor = "red";
-                        document.getElementById(digit + "e").style.backgroundColor = "red";
-                        document.getElementById(digit + "f").style.backgroundColor = "red";
-                        document.getElementById(digit + "g").style.backgroundColor = "red";
+                        document.getElementById(digit + "a").style.backgroundColor = acceso;
+                        document.getElementById(digit + "b").style.backgroundColor = acceso;
+                        document.getElementById(digit + "c").style.backgroundColor = acceso;
+                        document.getElementById(digit + "d").style.backgroundColor = acceso;
+                        document.getElementById(digit + "e").style.backgroundColor = acceso;
+                        document.getElementById(digit + "f").style.backgroundColor = acceso;
+                        document.getElementById(digit + "g").style.backgroundColor = acceso;
                         break;
                     case 9:
-                        document.getElementById(digit + "a").style.backgroundColor = "red";
-                        document.getElementById(digit + "b").style.backgroundColor = "red";
-                        document.getElementById(digit + "c").style.backgroundColor = "red";
-                        document.getElementById(digit + "d").style.backgroundColor = "red";
+                        document.getElementById(digit + "a").style.backgroundColor = acceso;
+                        document.getElementById(digit + "b").style.backgroundColor = acceso;
+                        document.getElementById(digit + "c").style.backgroundColor = acceso;
+                        document.getElementById(digit + "d").style.backgroundColor = acceso;
                         document.getElementById(digit + "e").style.backgroundColor = "white";
-                        document.getElementById(digit + "f").style.backgroundColor = "red";
-                        document.getElementById(digit + "g").style.backgroundColor = "red";
+                        document.getElementById(digit + "f").style.backgroundColor = acceso;
+                        document.getElementById(digit + "g").style.backgroundColor = acceso;
                         break;
                 }
             }
+        }
+        function ricomincia() {
+            location.reload();
         }
 
     </script>
 </head>
 
 <body onload="init()">
+    <div id="score">
+        <div id="digit2">
+            <div class="segment h" id="sign"></div>
+            <div class="segment h a" id="da"></div>
+            <div class="segment v b" id="db"></div>
+            <div class="segment v c" id="dc"></div>
+            <div class="segment h d" id="dd"></div>
+            <div class="segment v e" id="de"></div>
+            <div class="segment v f" id="df"></div>
+            <div class="segment h g" id="dg"></div>
+        </div>
 
-    <div id="digit2">
-        <div class="segment h" id="sign"></div>
-        <div class="segment h a" id="da"></div>
-        <div class="segment v b" id="db"></div>
-        <div class="segment v c" id="dc"></div>
-        <div class="segment h d" id="dd"></div>
-        <div class="segment v e" id="de"></div>
-        <div class="segment v f" id="df"></div>
-        <div class="segment h g" id="dg"></div>
+        <div id="digit1">
+            <div class="segment h a" id="ua"></div>
+            <div class="segment v b" id="ub"></div>
+            <div class="segment v c" id="uc"></div>
+            <div class="segment h d" id="ud"></div>
+            <div class="segment v e" id="ue"></div>
+            <div class="segment v f" id="uf"></div>
+            <div class="segment h g" id="ug"></div>
+        </div>
     </div>
+    <div id="cronometro">
+        <div id="timer1">
+            <div class="segment hs as" id="t1a"></div>
+            <div class="segment vs bs" id="t1b"></div>
+            <div class="segment vs cs" id="t1c"></div>
+            <div class="segment hs ds" id="t1d"></div>
+            <div class="segment vs es" id="t1e"></div>
+            <div class="segment vs fs" id="t1f"></div>
+            <div class="segment hs gs" id="t1g"></div>
+        </div>
 
-    <div id="digit1">
-        <div class="segment h a" id="ua"></div>
-        <div class="segment v b" id="ub"></div>
-        <div class="segment v c" id="uc"></div>
-        <div class="segment h d" id="ud"></div>
-        <div class="segment v e" id="ue"></div>
-        <div class="segment v f" id="uf"></div>
-        <div class="segment h g" id="ug"></div>
+        <div id="timer2">
+            <div class="segment hs as" id="t2a"></div>
+            <div class="segment vs bs" id="t2b"></div>
+            <div class="segment vs cs" id="t2c"></div>
+            <div class="segment hs ds" id="t2d"></div>
+            <div class="segment vs es" id="t2e"></div>
+            <div class="segment vs fs" id="t2f"></div>
+            <div class="segment hs gs" id="t2g"></div>
+        </div>
     </div>
 
     <div class="campo">
@@ -301,10 +443,16 @@
         <div id="p7" class="pallina riga3 colonna1" onclick="cliccato(this)"></div>
         <div id="p8" class="pallina riga3 colonna2" onclick="cliccato(this)"></div>
         <div id="p9" class="pallina riga3 colonna3" onclick="cliccato(this)"></div>
+        <button id="ricomincia" onclick="ricomincia()" class="key">Ricomincia</button>
+
+    
     </div>
     <h1>Tocca la talpa</h1>
-    <h2>Un punto in più se la pallina è verde</h2>
-    <h2>Un punto in meno se la pallina è rossa</h2>
+    <h3>Un punto in più se la pallina è verde <br>
+        Un punto in meno se la pallina è rossa <br>
+        60 secondi per fare il tuo record</h3>
+
+    <h1 id="gameOver">GAME OVER</h1>
 
 </body>
 
