@@ -2,6 +2,20 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks</title>
+
+    <style>
+        h1 {
+            font-size: 40px;
+        }
+    
+        button, input {
+            font-size: 30px;
+        }
+    </style>
+
     <script>
 
         function aggiungi() {
@@ -9,20 +23,20 @@
             elemento.innerHTML = document.getElementById("task").value;
             // Add new item to task list
             document.getElementById('tasks').append(elemento);
-            document.getElementById('task').value="";
-            document.getElementById('task').placeholder="New Task";
-            document.getElementById('sfondo').style.backgroundColor='red';
+
+            // Ripristino campi input
+            document.getElementById('task').value = "";
+            document.getElementById('task').placeholder = "Da comprare?";
         }
 
     </script>
-    <title>Tasks</title>
 </head>
 
 <body id="sfondo">
     <h1>Lista della spesa</h1>
     <ul id="tasks">
     </ul>
-    <input id="task" placeholder="New Task" type="text" value="">
+    <input id="task" placeholder="Da comprare" type="text" value="">
     <button onclick="aggiungi()">aggiungi</button>
 </body>
 

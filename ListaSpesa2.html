@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<style>
-   #quantity {
-    display: nome;
-   } 
-</style>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Spesa</title>
+
+    <style>
+        body{
+            font-size: 40px;
+        }
+        button, input {
+            font-size: 30px;
+        }
+    </style>
+
     <script>
         function aggiungi() {
             const nuovariga = document.createElement('tr');
@@ -13,7 +21,6 @@
             const nuovacellaQuanto = document.createElement("td");
 
             nuovacellaCosa.innerHTML = document.getElementById("cosa").value;
-            nuovacellaQuanto.className="quantity";
             nuovacellaQuanto.innerHTML = document.getElementById("quanto").value;
 
             nuovariga.append(nuovacellaCosa);
@@ -21,6 +28,8 @@
 
             // Add new item to task list
             document.getElementById('lista').append(nuovariga);
+
+            // Ripristino campi di input
             document.getElementById('cosa').value = "";
             document.getElementById('cosa').placeholder = "Cosa Comprare";
             document.getElementById('quanto').value = "";
@@ -36,13 +45,7 @@
             const list = document.getElementById("lista");
             list.removeChild(list.lastElementChild);
         }
-        function mostraQuantity() {
-            document.getElementsByClassName("quantity");
-            
-
-        }
     </script>
-    <title>Tasks</title>
 </head>
 
 <body>
@@ -53,7 +56,6 @@
     <input id="quanto" placeholder="Quanto" type="text" value=""><br>
 
     <button onclick="aggiungi()">Aggiungi</button><br>
-    <button onclick="mostraQuantity()">Mostra Quantità</button><br>
 
     <button onclick="cancellaUltimo()">Undo</button>
 
