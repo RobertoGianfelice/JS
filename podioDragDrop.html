@@ -1,0 +1,191 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <style>
+        #podio {
+            position: relative;
+            top:20px;
+            left:50px
+        }
+        .scalino {
+            position: absolute;
+            width: 200px;
+            border: 1px solid #aaaaaa;
+        }
+        #div2 {
+            top:65px;
+            left:10px;
+            height: 75px;
+        }
+        #div1 {
+            top:40px;
+            left: 215px;
+            height: 100px;
+        }
+        #div3 {
+            top:80px;
+            left:420px;
+            height: 60px;
+        }
+        #nomi {
+            position: relative;
+            top:190px;
+            left:50px
+        }
+        .piloti {
+            position: absolute;
+            top:20px;
+            text-align: center;
+            width: 140px;
+            height: 70px;
+            font-size: 30px;
+        }
+
+        #nome2 {
+            left:50px;
+        }
+        #nome1 {
+            left:260px;
+        }
+        #nome3 {
+            left:465px;
+        }
+
+
+        .pallina {
+            background-color: red;
+            width: 60px;
+            height: 60px;
+            border-radius: 100%;
+            margin-top: 0px;
+            margin-left: 80px;
+            font-size: 50px;
+            text-align: center;
+        }
+
+        .posizione {
+            vertical-align: center;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function dragstartHandler(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function dragoverHandler(ev) {
+            ev.preventDefault();
+        }
+
+        function dropHandler(myDiv,ev) {
+            ev.preventDefault();
+            const data = ev.dataTransfer.getData("text");
+            ev.target.appendChild(document.getElementById(data));
+            switch (myDiv.id) {
+                case "div2":
+                    document.getElementById("nome2").innerHTML=data;
+                    break;
+                case "div1":
+                    document.getElementById("nome1").innerHTML = data;
+                    break;
+                case "div3":
+                    document.getElementById("nome3").innerHTML = data;
+                    break;
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+    <h1>Drag and Drop API - Podio F1</h1>
+    <table>  
+        <tr>
+            <td>
+                <div class="pallina" id="Max Verstappen" draggable="true" ondragstart="dragstartHandler(event)">1</div>
+            </td>
+            <td>
+                <div class="pallina" id="Gabriel Bortoleto" draggable="true" ondragstart="dragstartHandler(event)">5</div>
+            </td>
+            <td>
+                <div class="pallina" id="Oscar Piastri" draggable="true" ondragstart="dragstartHandler(event)">81</div>
+            </td>
+            <td>
+                <div class="pallina" id="Lando Norris" draggable="true" ondragstart="dragstartHandler(event)">4</div>
+            </td>
+            <td>
+                <div class="pallina" id="Charles Leclerc" draggable="true" ondragstart="dragstartHandler(event)">16</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="pallina" id="Lewis Hamilton" draggable="true" ondragstart="dragstartHandler(event)">44</div>
+            </td>
+            <td>
+                <div class="pallina" id="Jack Doohan" draggable="true" ondragstart="dragstartHandler(event)">7</div>
+            </td>
+            <td>
+                <div class="pallina" id="George Russell" draggable="true" ondragstart="dragstartHandler(event)">63</div>
+            </td>
+            <td>
+                <div class="pallina" id="Andrea Kimi Antonelli" draggable="true" ondragstart="dragstartHandler(event)">12</div>
+            </td>
+            <td>
+                <div class="pallina" id="concorrente10" draggable="true" ondragstart="dragstartHandler(event)">10</div>
+            </td>
+
+
+        </tr>
+        <tr>
+            <td>
+                <div class="pallina" id="Fernando Alonso" draggable="true" ondragstart="dragstartHandler(event)">14</div>
+            </td>
+            <td>
+                <div class="pallina" id="Lance Stroll" draggable="true" ondragstart="dragstartHandler(event)">18</div>
+            </td>
+            <td>
+                <div class="pallina" id="Pierre Gasly" draggable="true" ondragstart="dragstartHandler(event)">10</div>
+            </td>
+            <td>
+                <div class="pallina" id="Esteban Ocon" draggable="true" ondragstart="dragstartHandler(event)">31</div>
+            </td>
+            <td>
+                <div class="pallina" id="Oliver Bearman" draggable="true" ondragstart="dragstartHandler(event)">87</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="pallina" id="Yuki Tsunoda" draggable="true" ondragstart="dragstartHandler(event)">22</div>
+            </td>
+            <td>
+                <div class="pallina" id="Isack Hadjar" draggable="true" ondragstart="dragstartHandler(event)">6</div>
+            </td>
+            <td>
+                <div class="pallina" id="Alexander Albon" draggable="true" ondragstart="dragstartHandler(event)">23</div>
+            </td>
+            <td>
+                <div class="pallina" id="Carlos Sainz" draggable="true" ondragstart="dragstartHandler(event)">55</div>
+            </td>
+            <td>
+                <div class="pallina" id="Nico Hulkenberg" draggable="true" ondragstart="dragstartHandler(event)">27</div>
+            </td>
+        </tr>
+
+    </table>
+    <div id="podio">
+    <div class="scalino" id="div2" ondrop="dropHandler(this,event)" ondragover="dragoverHandler(event)"></div>
+    <div class="scalino" id="div1" ondrop="dropHandler(this,event)" ondragover="dragoverHandler(event)"></div>
+    <div class="scalino" id="div3" ondrop="dropHandler(this,event)" ondragover="dragoverHandler(event)"></div>
+    </div>
+    <div id="nomi">
+        <div class="piloti" id="nome2" ></div>
+        <div class="piloti" id="nome1" ></div>
+        <div class="piloti" id="nome3" ></div>
+    </div>
+
+    <br>
+
+</body>
+
+</html>
