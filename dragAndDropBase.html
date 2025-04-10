@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&D</title>
+
+        <style>
+        
+            .piazzola {
+                position: absolute;
+                width: 200px;
+                height: 200px;
+                border: 1px solid #aaaaaa;
+            }
+            #partenza {
+                left:100px;
+            }
+            #arrivo {
+                left:350px;
+            }
+        
+        
+            .pallina {
+                background-color: red;
+                width: 60px;
+                height: 60px;
+                border-radius: 100%;
+                margin-top: 0px;
+                margin-left: 80px;
+                font-size: 50px;
+                text-align: center;
+            }
+        
+        </style>
+            <script>
+                function dragstartHandler(ev) {
+                    ev.dataTransfer.setData("text", ev.target.id);
+                }
+
+                function dragoverHandler(ev) {
+                    ev.preventDefault();
+                }
+
+                function dropHandler(myDiv, ev) {
+                    ev.preventDefault();
+                    const data = ev.dataTransfer.getData("text");
+                    ev.target.appendChild(document.getElementById(data));
+                }
+            </script>
+
+
+</head>
+<body>
+    
+
+    <div class="piazzola" id="partenza" ondrop="dropHandler(this,event)" ondragover="dragoverHandler(event)">
+        <div class="pallina" id="p1" draggable="true" ondragstart="dragstartHandler(event)">:-)</div>
+    </div>
+    <div class="piazzola" id="arrivo" ondrop="dropHandler(this,event)" ondragover="dragoverHandler(event)"></div>
+
+</body>
+</html>
